@@ -26,11 +26,11 @@ function onScroll({ target }) {
 <template>
   <div>虚拟列表</div>
   <div class="list-container" @scroll="onScroll">
-    <ul class="list-inner-container" :style="style">
-      <li class="list-item" v-for="{ name, idx } of data.slice(startIndex, endIndex)" :key="idx">
+    <div class="list-inner-container" :style="style">
+      <div class="list-item" v-for="{ name, idx } of data.slice(startIndex, endIndex)" :key="idx">
         {{ name }}
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -40,9 +40,7 @@ function onScroll({ target }) {
   max-height: 666px;
   overflow: auto;
 }
-.list-inner-container {
-  list-style: none;
-}
+
 .list-item {
   display: flex;
   justify-content: center;
