@@ -1,5 +1,11 @@
 <script setup>
-const floores = [1, 2, 3, 4, 5, 6, 7]
+import { Random } from 'mockjs'
+const floores = [1, 2, 3, 4, 5, 6, 7].map((i) => {
+  return {
+    color: Random.color(),
+    floor: i
+  }
+})
 /*
  * 锚点点击事件
  * el 锚点目标选择器
@@ -48,12 +54,23 @@ function startAnimation(action, duration = 2000) {
 
 <template>
   <div class="anchors">
-    <a :class="`anchor anchor_${i}`" v-for="i of floores" :key="i" @click="moveTo(`.floor_${i}`)">
-      {{ i }}</a
+    <a
+      :class="['anchor', `anchor_${floor}`]"
+      v-for="{ color, floor } of floores"
+      :key="floor"
+      :style="{ backgroundColor: color }"
+      @click="moveTo(`.floor_${floor}`)"
+    >
+      floor {{ floor }}</a
     >
   </div>
-  <div :class="['floor', 'floor_' + i]" :id="'floor_' + i" v-for="i of floores" :key="i">
-    {{ i }}
+  <div
+    :class="['floor', 'floor_' + floor]"
+    v-for="{ color, floor } of floores"
+    :key="floor"
+    :style="{ backgroundColor: color }"
+  >
+    floor {{ floor }}
   </div>
 </template>
 
@@ -66,51 +83,13 @@ function startAnimation(action, duration = 2000) {
     padding: 0 20px;
     margin: 20px;
     cursor: pointer;
-    &_1 {
-      background: red;
-    }
-    &_2 {
-      background: orange;
-    }
-    &_3 {
-      background: yellow;
-    }
-    &_4 {
-      background: green;
-    }
-    &_5 {
-      background: violet;
-    }
-    &_6 {
-      background: blue;
-    }
-    &_7 {
-      background: indigo;
-    }
   }
 }
 .floor {
   height: 800px;
-  &_1 {
-    background: red;
-  }
-  &_2 {
-    background: orange;
-  }
-  &_3 {
-    background: yellow;
-  }
-  &_4 {
-    background: green;
-  }
-  &_5 {
-    background: violet;
-  }
-  &_6 {
-    background: blue;
-  }
-  &_7 {
-    background: indigo;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
 }
 </style>
