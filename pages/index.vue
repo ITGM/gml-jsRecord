@@ -14,7 +14,7 @@ const CropImg4 = await CropAvatar(list.slice(0, 4))
   <img :src="CropImg3" alt="" />
   <img :src="CropImg4" alt="" />
 </template>
-<style>
+<style scoped lang="scss">
 img {
   margin: 20px;
 }
